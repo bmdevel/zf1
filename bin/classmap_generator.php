@@ -232,7 +232,7 @@ foreach ($matches as $match) {
 $content = preg_replace_callback(
     '(\n\s+([^=]+)=>)',
     function ($matches) use ($maxWidth) {
-        return '\n    ' . $matches[1] . str_repeat(' ', $maxWidth - strlen($matches[1])) . '=>';
+        return "\n    " . $matches[1] . str_repeat(' ', $maxWidth - strlen($matches[1])) . '=>';
     },
     $content
 );
