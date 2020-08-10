@@ -33,7 +33,7 @@ require_once 'Zend/Service/DeveloperGarden/Response/BaseType.php';
  * @author     Marco Kaiser
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_DeveloperGarden_Response_SmsValidation_ValidateResponse
+class Zend_Service_DeveloperGarden_Response_SmsValidation_InvalidateResponse
     extends Zend_Service_DeveloperGarden_Response_BaseType
 {
 }
