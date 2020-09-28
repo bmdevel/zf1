@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Format
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -29,7 +29,7 @@ require_once 'Zend/Locale/Format.php';
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Locale
  */
@@ -50,6 +50,8 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         } else if (defined('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE')) {
             setlocale(LC_ALL, TESTS_ZEND_LOCALE_FORMAT_SETLOCALE);
         }
+
+        Zend_Locale_Data::removeCache();
     }
 
     /**
@@ -151,6 +153,11 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(       0.1234567, Zend_Locale_Format::getFloat(       0.1234567));
         $this->assertEquals(-1234567.12345,   Zend_Locale_Format::getFloat(-1234567.12345  ));
         $this->assertEquals( 1234567.12345,   Zend_Locale_Format::getFloat( 1234567.12345  ));
+
+        $this->assertEquals( 0.01, Zend_Locale_Format::getFloat(  1e-2 ));
+        $this->assertEquals( 0.01, Zend_Locale_Format::getFloat( '1e-2'));
+        $this->assertEquals(-0.01, Zend_Locale_Format::getFloat( -1e-2 ));
+        $this->assertEquals(-0.01, Zend_Locale_Format::getFloat('-1e-2'));
 
         $options = array('locale' => 'de');
         $this->assertEquals(       0,         Zend_Locale_Format::getFloat(         '0',         $options));
@@ -916,6 +923,7 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         $this->assertSame('r',    Zend_Locale_Format::convertPhpToIsoFormat('r'));
         $this->assertSame('U',    Zend_Locale_Format::convertPhpToIsoFormat('U'));
         $this->assertSame('HHmmss', Zend_Locale_Format::convertPhpToIsoFormat('His'));
+        $this->assertSame("dd MMMM yyyy 'alle' H:mm:ss", Zend_Locale_Format::convertPhpToIsoFormat('d F Y \a\l\l\e G:i:s'));
     }
 
 
@@ -1107,5 +1115,36 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         } catch ( PHPUnit_Framework_Error_Notice $ex ) {
             $this->fail('Zend_Locale_Format::checkDateFormat emitted unexpected E_NOTICE');
         }
+    }
+
+    /**
+     * @group GH-363
+     */
+    public function testByDefaultCacheShouldBeUsed()
+    {
+        $value = Zend_Locale_Format::getDate('2014-01-01');
+
+        $this->assertTrue(Zend_Locale_Data::hasCache());
+    }
+
+    /**
+     * @group GH-363
+     */
+    public function testZendLocaleDisableCacheShouldNotOverwritten()
+    {
+        Zend_Locale::disableCache(true);
+        $value = Zend_Locale_Format::getDate('2014-01-01');
+
+        $this->assertFalse(Zend_Locale_Data::hasCache());
+    }
+
+    /**
+     * @group GH-430
+     */
+    public function testIsIntegerForLocaleZhHK()
+    {
+        $this->assertTrue(
+            Zend_Locale_Format::isInteger('1', array('locale' => 'zh_HK'))
+        );
     }
 }

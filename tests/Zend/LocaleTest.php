@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id $
  */
@@ -36,7 +36,7 @@ require_once 'Zend/Cache.php';
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Locale
  */
@@ -500,8 +500,8 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('015 011 017 014 018', Zend_LocaleTestHelper::getTranslation('002', 'regiontoterritory', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getTranslation('xxx', 'regiontoterritory'));
 
-        $this->assertEquals('AT BE CH DE LI LU NA', Zend_LocaleTestHelper::getTranslation('de', 'territorytolanguage', 'de_DE'));
-        $this->assertEquals('AT BE CH DE LI LU NA', Zend_LocaleTestHelper::getTranslation('de', 'territorytolanguage', 'en'));
+        $this->assertEquals('AT BE CH DE LI LU', Zend_LocaleTestHelper::getTranslation('de', 'territorytolanguage', 'de_DE'));
+        $this->assertEquals('AT BE CH DE LI LU', Zend_LocaleTestHelper::getTranslation('de', 'territorytolanguage', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getTranslation('xxx', 'territorytolanguage'));
     }
 

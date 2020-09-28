@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Db
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -34,7 +34,7 @@ require_once 'Zend/Db/Adapter/Sqlsrv.php';
  * @category   Zend
  * @package    Zend_Db
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
@@ -557,5 +557,16 @@ class Zend_Db_Adapter_SqlsrvTest extends Zend_Db_Adapter_TestCommon
     public function getDriver()
     {
         return 'Sqlsrv';
+    }
+
+    /**
+     * test that quote() escapes null byte character
+     * in a string.
+     */
+    public function testAdapterQuoteNullByteCharacter()
+    {
+        $string = "1\0";
+        $value  = $this->_db->quote($string);
+        $this->assertEquals("'1\\000'", $value);
     }
 }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Validate
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -30,7 +30,7 @@ require_once 'Zend/Validate/Hostname.php';
  * @category   Zend
  * @package    Zend_Validate
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validate
  */
@@ -234,7 +234,7 @@ class Zend_Validate_HostnameTest extends PHPUnit_Framework_TestCase
 
         // Check TLD matching
         $valuesExpected = array(
-            array(true, array('domain.co.uk', 'domain.uk.com', 'domain.tl', 'domain.zw', 'domain.menu')),
+            array(true, array('domain.co.uk', 'domain.uk.com', 'domain.tl', 'domain.zw', 'domain.menu', 'domain.versicherung')),
             array(false, array('domain.xx', 'domain.zz', 'domain.madeup'))
             );
         foreach ($valuesExpected as $element) {
@@ -334,7 +334,7 @@ class Zend_Validate_HostnameTest extends PHPUnit_Framework_TestCase
 
         // Check TLD matching
         $valuesExpected = array(
-            array(true, array('xn--brger-kva.com')),
+            array(true, array('xn--brger-kva.com', 'xn--eckwd4c7cu47r2wf.jp')),
             array(false, array('xn--brger-x45d2va.com', 'xn--bürger.com', 'xn--'))
             );
         foreach ($valuesExpected as $element) {
@@ -507,5 +507,43 @@ class Zend_Validate_HostnameTest extends PHPUnit_Framework_TestCase
         $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_ALL);
 
         $this->assertTrue($validator->isValid('test.rs'));
+    }
+
+    /**
+     * @group GH-19
+     */
+    public function testRussianIdn()
+    {
+        $validator = new Zend_Validate_Hostname();
+        $this->assertTrue($validator->isValid('кц.рф'));
+        $this->assertTrue($validator->isValid('президент.рф'));
+    }
+
+    /**
+     * @group GH-451
+     */
+    public function testVermögensberaterIdns()
+    {
+        $validator = new Zend_Validate_Hostname();
+        $this->assertTrue($validator->isValid('mysite.vermögensberater'));
+    }
+
+    /**
+     * @group GH-610
+     */
+    public function testGermanSmallLetterSharpS()
+    {
+        $validator = new Zend_Validate_Hostname();
+        $this->assertTrue($validator->isValid('straße.de'));
+    }
+
+    /**
+     * @group GH-612
+     */
+    public function testZeroSubdomain()
+    {
+        $validator = new Zend_Validate_Hostname();
+        $this->assertTrue($validator->isValid('1.pool.ntp.org'));
+        $this->assertTrue($validator->isValid('0.pool.ntp.org'));
     }
 }

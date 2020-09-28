@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -43,7 +43,7 @@ require_once 'Zend/View.php';
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
@@ -4858,46 +4858,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
         // Test element
         $this->assertTrue($element->hasErrors());
         $this->assertFalse($element->isValid(1));
-    }
-
-    public function testSetDefaultsAllowOverridingWithNonArrayParameter()
-    {
-        //this would throw a strict warning if the setDefaults() method requires param to be array
-        $form = new Zend_Form_FormTest_SetDefaults();
-    }
-
-    public function testCanSetElementDefaultValuesFromTraversable()
-    {
-        $this->testCanAddAndRetrieveMultipleElements();
-        $values = array(
-            'foo' => 'foovalue',
-            'bar' => 'barvalue',
-            'baz' => 'bazvalue',
-            'bat' => 'batvalue',
-        );
-        $traversable = new ArrayIterator($values);
-        $this->form->setDefaults($traversable);
-        $elements = $this->form->getElements();
-        foreach (array_keys($values) as $name) {
-            $this->assertEquals($name . 'value', $elements[$name]->getValue());
-        }
-    }
-
-    /**
-     * @expectedException Zend_Form_Exception
-     * @expectedExceptionMessage Argument passed to setDefaults() must be of type array or Traversable.
-     */
-    public function testSetDefaultsWithInvalidTypeThrowsException()
-    {
-        $this->form->setDefaults(new stdClass());
-    }
-}
-
-class Zend_Form_FormTest_SetDefaults extends Zend_Form
-{
-    public function setDefaults($defaults)
-    {
-        return parent::setDefaults($defaults);
     }
 }
 

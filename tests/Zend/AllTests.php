@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -76,6 +76,7 @@ require_once 'Zend/Oauth/AllTests.php';
 require_once 'Zend/OpenIdTest.php';
 require_once 'Zend/OpenId/AllTests.php';
 require_once 'Zend/Paginator/AllTests.php';
+require_once 'Zend/PdfTest.php';
 require_once 'Zend/Pdf/AllTests.php';
 require_once 'Zend/ProgressBar/AllTests.php';
 require_once 'Zend/Reflection/AllTests.php';
@@ -112,7 +113,7 @@ require_once 'Zend/XmlRpc/AllTests.php';
  * @package    Zend
  * @subpackage UnitTests
  * @group      Zend
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_AllTests
@@ -215,6 +216,7 @@ class Zend_AllTests
         $suite->addTest(Zend_Navigation_AllTests::suite());
         $suite->addTest(Zend_Oauth_AllTests::suite());
         $suite->addTest(Zend_Paginator_AllTests::suite());
+        $suite->addTestSuite('Zend_PdfTest');
         $suite->addTest(Zend_Pdf_AllTests::suite());
         $suite->addTest(Zend_ProgressBar_AllTests::suite());
         $suite->addTestSuite('Zend_RegistryTest');

@@ -1091,11 +1091,6 @@
                     <xi:include href="../en/module_specs/Zend_Gdata_Photos.xml" />
                 </xi:fallback>
             </xi:include>
-            <xi:include href="module_specs/Zend_Gdata_YouTube.xml">
-                <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Gdata_YouTube.xml" />
-                </xi:fallback>
-            </xi:include>
             <xi:include href="module_specs/Zend_Gdata_Exception.xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Gdata_Exception.xml" />
@@ -1942,11 +1937,6 @@
                     <xi:include href="../en/module_specs/Zend_Service_Delicious.xml" />
                 </xi:fallback>
             </xi:include>
-            <xi:include href="module_specs/Zend_Service_DeveloperGarden.xml">
-                <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Service_DeveloperGarden.xml" />
-                </xi:fallback>
-            </xi:include>
             <xi:include href="module_specs/Zend_Service_Ebay.xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Service_Ebay.xml" />
@@ -2010,11 +2000,6 @@
             <xi:include href="module_specs/Zend_Service_StrikeIron-AdvancedUses.xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Service_StrikeIron-AdvancedUses.xml" />
-                </xi:fallback>
-            </xi:include>
-            <xi:include href="module_specs/Zend_Service_Technorati.xml">
-                <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Service_Technorati.xml" />
                 </xi:fallback>
             </xi:include>
             <xi:include href="module_specs/Zend_Service_Twitter.xml" parse="xml">
