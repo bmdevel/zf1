@@ -143,9 +143,11 @@ class Zend_Cache_Core
             Zend_Cache::throwException("Options passed were not an array"
             . " or Zend_Config instance.");
         }
+
         foreach ($options as $name => $value) {
             $this->setOption($name, $value);
         }
+
         $this->_loggerSanity();
     }
 
