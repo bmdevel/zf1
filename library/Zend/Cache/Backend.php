@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -24,7 +24,7 @@
 /**
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Cache_Backend
@@ -59,7 +59,6 @@ class Zend_Cache_Backend
      *
      * @param  array $options Associative array of options
      * @throws Zend_Cache_Exception
-
      */
     public function __construct(array $options = array())
     {
@@ -268,7 +267,7 @@ class Zend_Cache_Backend
      * Log a message at the WARN (4) priority.
      *
      * @param  string $message
-     * @param  int    $priority
+     * @throws Zend_Cache_Exception
      * @return void
      */
     protected function _log($message, $priority = 4)
