@@ -53,6 +53,7 @@ class Zend_Filter_File_Rename implements Zend_Filter_Interface
      */
     public function __construct($options)
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } elseif (is_string($options)) {
@@ -62,8 +63,8 @@ class Zend_Filter_File_Rename implements Zend_Filter_Interface
             throw new Zend_Filter_Exception('Invalid options argument provided to filter');
         }
 
-        if (1 < func_num_args()) {
-            $argv = func_get_args();
+        if (1 < count($functionArguments)) {
+            $argv = $functionArguments;
             array_shift($argv);
             $source    = array_shift($argv);
             $overwrite = false;
@@ -142,11 +143,11 @@ class Zend_Filter_File_Rename implements Zend_Filter_Interface
     public function getNewName($value, $source = false)
     {
         $file = $this->_getFileName($value);
-        
+
         if (!is_array($file) || !array_key_exists('source', $file) || !array_key_exists('target', $file)) {
             return $value;
         }
-        
+
         if ($file['source'] == $file['target']) {
             return $value;
         }
