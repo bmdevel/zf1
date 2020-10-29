@@ -124,13 +124,14 @@ class Zend_Validate_File_ImageSize extends Zend_Validate_Abstract
      */
     public function __construct($options)
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } elseif (1 < func_num_args()) {
+        } elseif (1 < count($functionArguments)) {
             if (!is_array($options)) {
                 $options = array('minwidth' => $options);
             }
-            $argv = func_get_args();
+            $argv = $functionArguments;
             array_shift($argv);
             $options['minheight'] = array_shift($argv);
             if (!empty($argv)) {

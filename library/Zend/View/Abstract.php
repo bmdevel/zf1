@@ -901,14 +901,15 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
      */
     public function escape($var)
     {
+        $functionArguments = func_get_args();
         if (in_array($this->_escape, array('htmlspecialchars', 'htmlentities'))) {
             return call_user_func($this->_escape, $var, ENT_COMPAT, $this->_encoding);
         }
 
-        if (1 == func_num_args()) {
+        if (1 === count($functionArguments)) {
             return call_user_func($this->_escape, $var);
         }
-        $args = func_get_args();
+        $args = $functionArguments;
         return call_user_func_array($this->_escape, $args);
     }
 

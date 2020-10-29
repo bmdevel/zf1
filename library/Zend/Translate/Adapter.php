@@ -127,10 +127,11 @@ abstract class Zend_Translate_Adapter {
      */
     public function __construct($options = array())
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (func_num_args() > 1) {
-            $args               = func_get_args();
+        } else if (count($functionArguments) > 1) {
+            $args               = $functionArguments;
             $options            = array();
             $options['content'] = array_shift($args);
 
@@ -196,10 +197,11 @@ abstract class Zend_Translate_Adapter {
      */
     public function addTranslation($options = array())
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (func_num_args() > 1) {
-            $args = func_get_args();
+        } else if (count($functionArguments) > 1) {
+            $args = $functionArguments;
             $options            = array();
             $options['content'] = array_shift($args);
 
@@ -214,7 +216,7 @@ abstract class Zend_Translate_Adapter {
         } else if (!is_array($options)) {
             $options = array('content' => $options);
         }
-        
+
         if (!isset($options['content']) || empty($options['content'])) {
             require_once 'Zend/Translate/Exception.php';
             throw new Zend_Translate_Exception("Required option 'content' is missing");
@@ -254,7 +256,7 @@ abstract class Zend_Translate_Adapter {
                 ),
                 RecursiveIteratorIterator::SELF_FIRST
             );
-            
+
             foreach ($iterator as $directory => $info) {
                 $file = $info->getFilename();
                 if (is_array($options['ignore'])) {
@@ -323,7 +325,7 @@ abstract class Zend_Translate_Adapter {
                     }
                 }
             }
-            
+
             unset($iterator);
         } else {
             $this->_addTranslationData($options);
@@ -585,10 +587,11 @@ abstract class Zend_Translate_Adapter {
      */
     private function _addTranslationData($options = array())
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (func_num_args() > 1) {
-            $args = func_get_args();
+        } else if (count($functionArguments) > 1) {
+            $args = $functionArguments;
             $options['content'] = array_shift($args);
 
             if (!empty($args)) {

@@ -399,7 +399,8 @@ class Zend_Mail_Protocol_Imap
      */
     public function escapeString($string)
     {
-        if (func_num_args() < 2) {
+        $functionArguments = func_get_args();
+        if (count($functionArguments) < 2) {
             if (strpos($string, "\n") !== false) {
                 return array('{' . strlen($string) . '}', $string);
             } else {
@@ -407,7 +408,7 @@ class Zend_Mail_Protocol_Imap
             }
         }
         $result = array();
-        foreach (func_get_args() as $string) {
+        foreach ($functionArguments as $string) {
             $result[] = $this->escapeString($string);
         }
         return $result;

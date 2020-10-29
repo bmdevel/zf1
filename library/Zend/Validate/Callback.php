@@ -151,11 +151,11 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
+        $args     = func_get_args();
         $this->_setValue($value);
 
         $options  = $this->getOptions();
         $callback = $this->getCallback();
-        $args     = func_get_args();
         $options  = array_merge($args, $options);
 
         try {

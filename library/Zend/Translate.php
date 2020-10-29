@@ -70,10 +70,11 @@ class Zend_Translate {
      */
     public function __construct($options = array())
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (func_num_args() > 1) {
-            $args               = func_get_args();
+        } else if (count($functionArguments) > 1) {
+            $args               = $functionArguments;
             $options            = array();
             $options['adapter'] = array_shift($args);
             if (!empty($args)) {
@@ -105,10 +106,11 @@ class Zend_Translate {
      */
     public function setAdapter($options = array())
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (func_num_args() > 1) {
-            $args               = func_get_args();
+        } else if (count($functionArguments) > 1) {
+            $args               = $functionArguments;
             $options            = array();
             $options['adapter'] = array_shift($args);
             if (!empty($args)) {

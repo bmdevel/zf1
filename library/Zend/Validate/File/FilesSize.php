@@ -68,6 +68,7 @@ class Zend_Validate_File_FilesSize extends Zend_Validate_File_Size
      */
     public function __construct($options)
     {
+        $functionArguments = func_get_args();
         $this->_files = array();
         $this->_setSize(0);
 
@@ -80,8 +81,8 @@ class Zend_Validate_File_FilesSize extends Zend_Validate_File_Size
             throw new Zend_Validate_Exception('Invalid options to validator provided');
         }
 
-        if (1 < func_num_args()) {
-            $argv = func_get_args();
+        if (1 < count($functionArguments)) {
+            $argv = $functionArguments;
             array_shift($argv);
             $options['max'] = array_shift($argv);
             if (!empty($argv)) {

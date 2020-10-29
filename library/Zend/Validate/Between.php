@@ -98,10 +98,11 @@ class Zend_Validate_Between extends Zend_Validate_Abstract
      */
     public function __construct($options)
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
-            $options = func_get_args();
+            $options = $functionArguments;
             $temp['min'] = array_shift($options);
             if (!empty($options)) {
                 $temp['max'] = array_shift($options);

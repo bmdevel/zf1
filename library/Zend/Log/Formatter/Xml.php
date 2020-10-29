@@ -57,10 +57,11 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
      */
     public function __construct($options = array())
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } elseif (!is_array($options)) {
-            $args = func_get_args();
+            $args = $functionArguments;
 
             $options = array(
             	'rootElement' => array_shift($args)
@@ -146,8 +147,8 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
         $elt = $dom->appendChild(new DOMElement($this->_rootElement));
 
         foreach ($dataToInsert as $key => $value) {
-            if (empty($value) 
-                || is_scalar($value) 
+            if (empty($value)
+                || is_scalar($value)
                 || (is_object($value) && method_exists($value,'__toString'))
             ) {
                 if($key == "message") {

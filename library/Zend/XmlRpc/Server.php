@@ -232,14 +232,15 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      */
     public function addFunction($function, $namespace = '')
     {
+        $functionArguments = func_get_args();
         if (!is_string($function) && !is_array($function)) {
             require_once 'Zend/XmlRpc/Server/Exception.php';
             throw new Zend_XmlRpc_Server_Exception('Unable to attach function; invalid', 611);
         }
 
         $argv = null;
-        if (2 < func_num_args()) {
-            $argv = func_get_args();
+        if (2 < count($functionArguments)) {
+            $argv = $functionArguments;
             $argv = array_slice($argv, 2);
         }
 
@@ -273,14 +274,15 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      */
     public function setClass($class, $namespace = '', $argv = null)
     {
+        $functionArguments = func_get_args();
         if (is_string($class) && !class_exists($class)) {
             require_once 'Zend/XmlRpc/Server/Exception.php';
             throw new Zend_XmlRpc_Server_Exception('Invalid method class', 610);
         }
 
         $args = null;
-        if (2 < func_num_args()) {
-            $args = func_get_args();
+        if (2 < count($functionArguments)) {
+            $args = $functionArguments;
             $args = array_slice($args, 2);
         }
 

@@ -136,10 +136,11 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
      */
     public function __construct($options = array())
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
-            $options = func_get_args();
+            $options = $functionArguments;
             $temp['allow'] = array_shift($options);
             if (!empty($options)) {
                 $temp['mx'] = array_shift($options);

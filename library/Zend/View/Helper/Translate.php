@@ -67,12 +67,13 @@ class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
      */
     public function translate($messageid = null)
     {
+        $functionArguments = func_get_args();
         if ($messageid === null) {
             return $this;
         }
 
         $translate = $this->getTranslator();
-        $options   = func_get_args();
+        $options   = $functionArguments;
 
         array_shift($options);
         $count  = count($options);
