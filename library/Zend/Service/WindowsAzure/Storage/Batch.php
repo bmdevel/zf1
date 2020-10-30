@@ -29,45 +29,45 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_WindowsAzure_Storage_Batch
-{	
+{
     /**
      * Storage client the batch is defined on
-     * 
+     *
      * @var Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
      */
     protected $_storageClient = null;
-    
+
     /**
      * For table storage?
-     * 
+     *
      * @var boolean
      */
     protected $_forTableStorage = false;
-    
+
     /**
      * Base URL
-     * 
+     *
      * @var string
      */
     protected $_baseUrl;
-    
+
     /**
      * Pending operations
-     * 
+     *
      * @var unknown_type
      */
     protected $_operations = array();
-    
+
     /**
      * Does the batch contain a single select?
-     * 
+     *
      * @var boolean
      */
     protected $_isSingleSelect = false;
-    
+
     /**
      * Creates a new Zend_Service_WindowsAzure_Storage_Batch
-     * 
+     *
      * @param Zend_Service_WindowsAzure_Storage_BatchStorageAbstract $storageClient Storage client the batch is defined on
      */
     public function __construct(Zend_Service_WindowsAzure_Storage_BatchStorageAbstract $storageClient = null, $baseUrl = '')
@@ -76,7 +76,7 @@ class Zend_Service_WindowsAzure_Storage_Batch
         $this->_baseUrl       = $baseUrl;
         $this->_beginBatch();
     }
-    
+
 	/**
 	 * Get base URL for creating requests
 	 *
@@ -86,17 +86,17 @@ class Zend_Service_WindowsAzure_Storage_Batch
 	{
 		return $this->_baseUrl;
 	}
-    
+
     /**
      * Starts a new batch operation set
-     * 
+     *
      * @throws Zend_Service_WindowsAzure_Exception
      */
     protected function _beginBatch()
     {
         $this->_storageClient->setCurrentBatch($this);
     }
-    
+
     /**
      * Cleanup current batch
      */

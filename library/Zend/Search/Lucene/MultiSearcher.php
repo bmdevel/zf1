@@ -25,7 +25,7 @@ require_once 'Zend/Search/Lucene/Interface.php';
 
 /**
  * Import Zend_Search_Lucene_Interface_MultiSearcher for BC (see ZF-12067)
- * @see Zend_Search_Lucene_Interface_MultiSearcher 
+ * @see Zend_Search_Lucene_Interface_MultiSearcher
  */
 require_once 'Zend/Search/Lucene/Interface/MultiSearcher.php';
 
@@ -43,7 +43,7 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      * List of indices for searching.
      * Array of Zend_Search_Lucene_Interface objects
      *
-     * @var array
+     * @var Zend_Search_Lucene_Interface[]
      */
     protected $_indices;
 
@@ -218,9 +218,8 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      */
     public static function setDefaultSearchField($fieldName)
     {
-        foreach ($this->_indices as $index) {
-            $index->setDefaultSearchField($fieldName);
-        }
+        require_once 'Zend/Search/Lucene/Exception.php';
+        throw new Zend_Search_Lucene_Exception("Cannot set default search field statically anymore");
     }
 
 
@@ -234,21 +233,8 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      */
     public static function getDefaultSearchField()
     {
-        if (count($this->_indices) == 0) {
-            require_once 'Zend/Search/Lucene/Exception.php';
-            throw new Zend_Search_Lucene_Exception('Indices list is empty');
-        }
-
-        $defaultSearchField = reset($this->_indices)->getDefaultSearchField();
-
-        foreach ($this->_indices as $index) {
-            if ($index->getDefaultSearchField() !== $defaultSearchField) {
-                require_once 'Zend/Search/Lucene/Exception.php';
-                throw new Zend_Search_Lucene_Exception('Indices have different default search field.');
-            }
-        }
-
-        return $defaultSearchField;
+        require_once 'Zend/Search/Lucene/Exception.php';
+        throw new Zend_Search_Lucene_Exception("Cannot get default search field statically anymore");
     }
 
     /**
@@ -260,9 +246,8 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      */
     public static function setResultSetLimit($limit)
     {
-        foreach ($this->_indices as $index) {
-            $index->setResultSetLimit($limit);
-        }
+        require_once 'Zend/Search/Lucene/Exception.php';
+        throw new Zend_Search_Lucene_Exception("Cannot set result set limit statically anymore");
     }
 
     /**
@@ -275,21 +260,8 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      */
     public static function getResultSetLimit()
     {
-        if (count($this->_indices) == 0) {
-            require_once 'Zend/Search/Lucene/Exception.php';
-            throw new Zend_Search_Lucene_Exception('Indices list is empty');
-        }
-
-        $defaultResultSetLimit = reset($this->_indices)->getResultSetLimit();
-
-        foreach ($this->_indices as $index) {
-            if ($index->getResultSetLimit() !== $defaultResultSetLimit) {
-                require_once 'Zend/Search/Lucene/Exception.php';
-                throw new Zend_Search_Lucene_Exception('Indices have different default search field.');
-            }
-        }
-
-        return $defaultResultSetLimit;
+        require_once 'Zend/Search/Lucene/Exception.php';
+        throw new Zend_Search_Lucene_Exception("Cannot get result set limit statically anymore");
     }
 
     /**
