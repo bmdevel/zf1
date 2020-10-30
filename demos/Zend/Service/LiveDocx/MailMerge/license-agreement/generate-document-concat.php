@@ -220,7 +220,7 @@ function concatenatePdfFilenames($inputFilenames, $outputFilename, $processor = 
 
         case PROCESSOR_PDFTK :
             $format  = '%s %s cat output %s';
-            $command = sprintf($format, EXEC_PDFTK, implode($inputFilenames, ' '), $outputFilename);
+            $command = sprintf($format, EXEC_PDFTK, implode(' ', $inputFilenames), $outputFilename);
         break;
 
         case PROCESSOR_GHOSTSCRIPT :
@@ -229,7 +229,7 @@ function concatenatePdfFilenames($inputFilenames, $outputFilename, $processor = 
             $format .= '-dColorImageFilter=/FlateEncode -dCompatibilityLevel=1.3 -dEmbedAllFonts=true ';
             $format .= '-dGrayImageFilter=/FlateEncode -dMaxSubsetPct=100 -dMonoImageFilter=/CCITTFaxEncode ';
             $format .= '-dSubsetFonts=true -sOUTPUTFILE=%s %s';
-            $command = sprintf($format, EXEC_GHOSTSCRIPT, $outputFilename, implode($inputFilenames, ' '));
+            $command = sprintf($format, EXEC_GHOSTSCRIPT, $outputFilename, implode(' ', $inputFilenames));
         break;
 
         default:
