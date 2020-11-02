@@ -1841,11 +1841,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
                 }
             } while (false);
 
-            if (PHP_VERSION_ID < 50600) {
-                iconv_set_encoding('internal_encoding', $origenc);
-            } else {
-                ini_set('default_charset', $origenc);
-            }
+            ini_set('default_charset', $origenc);
             // If the input passes as an Internet domain name, and domain names are allowed, then the hostname
             // passes validation
             if ($status && ($this->_options['allow'] & self::ALLOW_DNS)) {
