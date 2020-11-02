@@ -1074,9 +1074,6 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidPreexistingSessionIdDoesNotPreventRegenerationOfSid()
     {
-        // Pattern: [0-9a-v]*
-        ini_set('session.hash_bits_per_character', 5);
-
         // Session store
         $sessionCharSet = array_merge(range(0,9), range('a','v'));
         $sessionStore = dirname(__FILE__)
@@ -1107,7 +1104,7 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
 
         // We don't need the session any more, clean it up
         //but we don't to want to destroy it completely, while other tests can start
-        Zend_Session::$_unitTestEnabled = true; 
+        Zend_Session::$_unitTestEnabled = true;
         Zend_Session::destroy();
         foreach ( $sessionCharSet as $subdir ) {
             @rmdir($sessionStore . DIRECTORY_SEPARATOR . $subdir);

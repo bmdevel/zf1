@@ -88,6 +88,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
      */
     public function addFunction($function, $namespace = '')
     {
+        $functionArguments = func_get_args();
         if (!is_string($function) && (!is_array($function) || (2 > count($function)))) {
             require_once 'Zend/Json/Server/Exception.php';
             throw new Zend_Json_Server_Exception('Unable to attach function; invalid');
@@ -99,8 +100,8 @@ class Zend_Json_Server extends Zend_Server_Abstract
         }
 
         $argv = null;
-        if (2 < func_num_args()) {
-            $argv = func_get_args();
+        if (2 < count($functionArguments)) {
+            $argv = $functionArguments;
             $argv = array_slice($argv, 2);
         }
 
@@ -141,9 +142,10 @@ class Zend_Json_Server extends Zend_Server_Abstract
      */
     public function setClass($class, $namespace = '', $argv = null)
     {
+        $functionArguments = func_get_args();
         $argv = null;
-        if (3 < func_num_args()) {
-            $argv = func_get_args();
+        if (3 < count($functionArguments)) {
+            $argv = $functionArguments;
             $argv = array_slice($argv, 3);
         }
 

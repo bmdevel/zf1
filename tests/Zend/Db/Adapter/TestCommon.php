@@ -1394,12 +1394,6 @@ abstract class Zend_Db_Adapter_TestCommon extends Zend_Db_TestSetup
             $this->assertEquals('09091', $value,
                 "Incorrect quote() BIGINT_TYPE result for decimal int string with leading zeroes");
 
-            // test hex value with ODBC-style notation
-            $value = $this->_db->quote('0x83215600', $typeName);
-            $this->assertTrue(is_string($value));
-            $this->assertEquals('0x83215600', $value,
-                "Incorrect quote() BIGINT_TYPE result for big hex int string");
-
             // test non-numeric value; it should be zero
             $value = $this->_db->quote('abcd', $typeName);
             $this->assertTrue(is_string($value));
@@ -1571,7 +1565,7 @@ abstract class Zend_Db_Adapter_TestCommon extends Zend_Db_TestSetup
         // create a second connection to the same database
         $dbConnection2 = Zend_Db::factory($this->getDriver(), $this->_util->getParams());
         $dbConnection2->getConnection();
-              
+
         // notice the number of rows in connection 2
         $count = $dbConnection2->fetchOne("SELECT COUNT(*) FROM $bugs");
         $this->assertEquals(4, $count, 'Expecting to see 4 rows in bugs table (step 1)');

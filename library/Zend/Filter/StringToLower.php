@@ -46,10 +46,11 @@ class Zend_Filter_StringToLower implements Zend_Filter_Interface
      */
     public function __construct($options = null)
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
-            $options = func_get_args();
+            $options = $functionArguments;
             $temp    = array();
             if (!empty($options)) {
                 $temp['encoding'] = array_shift($options);

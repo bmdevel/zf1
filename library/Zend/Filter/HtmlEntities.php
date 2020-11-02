@@ -62,10 +62,11 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
      */
     public function __construct($options = array())
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
-            $options = func_get_args();
+            $options = $functionArguments;
             $temp['quotestyle'] = array_shift($options);
             if (!empty($options)) {
                 $temp['charset'] = array_shift($options);

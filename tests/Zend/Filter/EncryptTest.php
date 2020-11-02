@@ -134,59 +134,6 @@ PIDs9E7uuizAKDhRRRvho8BS
     }
 
     /**
-     * Ensures that the filter allows default encryption
-     *
-     * @return void
-     */
-    public function testDefaultEncryption()
-    {
-        if (!extension_loaded('mcrypt')) {
-            $this->markTestSkipped('Mcrypt extension not installed');
-        }
-
-        $filter = new Zend_Filter_Encrypt(array('adapter' => 'Mcrypt', 'key' => 'testkey'));
-        $filter->setVector('testvect');
-        $this->assertEquals(
-            array('key' => 'testkey',
-                  'algorithm' => MCRYPT_BLOWFISH,
-                  'algorithm_directory' => '',
-                  'mode' => MCRYPT_MODE_CBC,
-                  'mode_directory' => '',
-                  'vector' => 'testvect',
-                  'salt' => false),
-            $filter->getEncryption()
-        );
-    }
-
-    /**
-     * Ensures that the filter allows setting options de/encryption
-     *
-     * @return void
-     */
-    public function testGetSetEncryption()
-    {
-        if (!extension_loaded('mcrypt')) {
-            $this->markTestSkipped('Mcrypt extension not installed');
-        }
-
-        $filter = new Zend_Filter_Encrypt(array('adapter' => 'Mcrypt', 'key' => 'testkey'));
-        $filter->setVector('testvect');
-        $filter->setEncryption(
-            array('mode' => MCRYPT_MODE_ECB,
-                  'algorithm' => MCRYPT_3DES));
-        $this->assertEquals(
-            array('key' => 'testkey',
-                  'algorithm' => MCRYPT_3DES,
-                  'algorithm_directory' => '',
-                  'mode' => MCRYPT_MODE_ECB,
-                  'mode_directory' => '',
-                  'vector' => 'testvect',
-                  'salt' => false),
-            $filter->getEncryption()
-        );
-    }
-
-    /**
      * Ensures that the filter allows de/encryption
      *
      * @return void

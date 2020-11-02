@@ -83,10 +83,11 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
      */
     public function __construct($options = array())
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
-            $options     = func_get_args();
+            $options     = $functionArguments;
             $temp['min'] = array_shift($options);
             if (!empty($options)) {
                 $temp['max'] = array_shift($options);
@@ -199,29 +200,14 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
     public function setEncoding($encoding = null)
     {
         if ($encoding !== null) {
-            $orig = PHP_VERSION_ID < 50600
-                        ? iconv_get_encoding('internal_encoding')
-                        : ini_get('default_charset');
-            if (PHP_VERSION_ID < 50600) {
-                if ($encoding) {
-                    $result = iconv_set_encoding('internal_encoding', $encoding);
-                } else {
-                    $result = false;
-                }
-            } else {
-                ini_set('default_charset', $encoding);
-                $result = ini_get('default_charset');
-            }
+            $orig = ini_get('default_charset');
+            ini_set('default_charset', $encoding);
+            $result = ini_get('default_charset');
             if (!$result) {
                 require_once 'Zend/Validate/Exception.php';
                 throw new Zend_Validate_Exception('Given encoding not supported on this OS!');
             }
-
-            if (PHP_VERSION_ID < 50600) {
-                iconv_set_encoding('internal_encoding', $orig);
-            } else {
-                ini_set('default_charset', $orig);
-            }
+            ini_set('default_charset', $orig);
         }
         $this->_encoding = $encoding;
         return $this;

@@ -84,51 +84,6 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the filter allows default encryption
-     *
-     * @return void
-     */
-    public function testDefaultEncryption()
-    {
-        $filter = new Zend_Filter_Encrypt_Mcrypt(array('key' => 'testkey'));
-        $filter->setVector('testvect');
-        $this->assertEquals(
-            array('key' => 'testkey',
-                  'algorithm' => MCRYPT_BLOWFISH,
-                  'algorithm_directory' => '',
-                  'mode' => MCRYPT_MODE_CBC,
-                  'mode_directory' => '',
-                  'vector' => 'testvect',
-                  'salt' => false),
-            $filter->getEncryption()
-        );
-    }
-
-    /**
-     * Ensures that the filter allows setting options de/encryption
-     *
-     * @return void
-     */
-    public function testGetSetEncryption()
-    {
-        $filter = new Zend_Filter_Encrypt_Mcrypt(array('key' => 'testkey'));
-        $filter->setVector('testvect');
-        $filter->setEncryption(
-            array('mode' => MCRYPT_MODE_ECB,
-                  'algorithm' => MCRYPT_3DES));
-        $this->assertEquals(
-            array('key' => 'testkey',
-                  'algorithm' => MCRYPT_3DES,
-                  'algorithm_directory' => '',
-                  'mode' => MCRYPT_MODE_ECB,
-                  'mode_directory' => '',
-                  'vector' => 'testvect',
-                  'salt' => false),
-            $filter->getEncryption()
-        );
-    }
-
-    /**
      * Ensures that the filter allows de/encryption
      *
      * @return void

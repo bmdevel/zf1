@@ -70,20 +70,20 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
      */
     public function __construct($options)
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
             require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Array expected as parameter');
         } else {
-            $count = func_num_args();
             $temp  = array();
-            if ($count > 1) {
-                $temp['haystack'] = func_get_arg(0);
-                $temp['strict']   = func_get_arg(1);
+            if (count($functionArguments) > 1) {
+                $temp['haystack'] = $functionArguments[0];
+                $temp['strict']   = $functionArguments[1];
                 $options = $temp;
             } else {
-                $temp = func_get_arg(0);
+                $temp = $functionArguments[0];
                 if (!array_key_exists('haystack', $options)) {
                     $options = array();
                     $options['haystack'] = $temp;

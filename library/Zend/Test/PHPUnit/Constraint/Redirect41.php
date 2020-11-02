@@ -61,7 +61,7 @@ class Zend_Test_PHPUnit_Constraint_Redirect41 extends PHPUnit_Framework_Constrai
      * @var string
      */
     protected $_match             = null;
-    
+
     /**
      * What is actual redirect
      */
@@ -108,6 +108,9 @@ class Zend_Test_PHPUnit_Constraint_Redirect41 extends PHPUnit_Framework_Constrai
      */
     public function evaluate($other, $assertType = null, $variable = FALSE)
     {
+        $argv     = func_get_args();
+        $argc     = func_num_args();
+
         if (!$other instanceof Zend_Controller_Response_Abstract) {
             require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
             throw new Zend_Test_PHPUnit_Constraint_Exception('Redirect constraint assertions require a response object');
@@ -126,8 +129,6 @@ class Zend_Test_PHPUnit_Constraint_Redirect41 extends PHPUnit_Framework_Constrai
         $this->_assertType = $assertType;
 
         $response = $other;
-        $argv     = func_get_args();
-        $argc     = func_num_args();
 
         switch ($assertType) {
             case self::ASSERT_REDIRECT_TO:

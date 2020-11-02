@@ -29,22 +29,12 @@
 class Zend_Tool_Framework_Client_Config
 {
 
-    protected $_configFilepath = null;
+    protected $_configFilepath;
 
     /**
      * @var Zend_Config
      */
-    protected $_config = null;
-
-    /**
-     * @param array $options
-     */
-    public function __config($options = array())
-    {
-        if ($options) {
-            $this->setOptions($options);
-        }
-    }
+    protected $_config;
 
     /**
      * @param array $options

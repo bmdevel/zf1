@@ -341,8 +341,8 @@ class Zend_Feed_Reader
     {
         $dom = new DOMDocument;
         try {
-            $dom = Zend_Xml_Security::scan($string, $dom);        
-        } catch (Zend_Xml_Exception $e) {    
+            $dom = Zend_Xml_Security::scan($string, $dom);
+        } catch (Zend_Xml_Exception $e) {
             require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception(
                 $e->getMessage()
@@ -388,15 +388,13 @@ class Zend_Feed_Reader
      */
     public static function importFile($filename)
     {
-        @ini_set('track_errors', 1);
         $feed = @file_get_contents($filename);
-        @ini_restore('track_errors');
         if ($feed === false) {
             /**
              * @see Zend_Feed_Exception
              */
             require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception("File could not be loaded: $php_errormsg");
+            throw new Zend_Feed_Exception("File could not be loaded");
         }
         return self::importString($feed);
     }
@@ -454,7 +452,6 @@ class Zend_Feed_Reader
         } elseif($feed instanceof DOMDocument) {
             $dom = $feed;
         } elseif(is_string($feed) && !empty($feed)) {
-            @ini_set('track_errors', 1);
             //$oldValue = libxml_disable_entity_loader(true);
             $dom = new DOMDocument;
             try {
@@ -466,17 +463,9 @@ class Zend_Feed_Reader
                 );
             }
             //libxml_disable_entity_loader($oldValue);
-            @ini_restore('track_errors');
             if (!$dom) {
-                if (!isset($php_errormsg)) {
-                    if (function_exists('xdebug_is_enabled')) {
-                        $php_errormsg = '(error message not available, when XDebug is running)';
-                    } else {
-                        $php_errormsg = '(error message not available)';
-                    }
-                }
                 require_once 'Zend/Feed/Exception.php';
-                throw new Zend_Feed_Exception("DOMDocument cannot parse XML: $php_errormsg");
+                throw new Zend_Feed_Exception("DOMDocument cannot parse XML");
             }
         } else {
             require_once 'Zend/Feed/Exception.php';

@@ -101,14 +101,15 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
      */
     public function __construct($options)
     {
+        $functionArguments = func_get_args();
         if ($options instanceof Zend_Db_Select) {
             $this->setSelect($options);
             return;
         }
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (func_num_args() > 1) {
-            $options       = func_get_args();
+        } else if (count($functionArguments) > 1) {
+            $options       = $functionArguments;
             $temp['table'] = array_shift($options);
             $temp['field'] = array_shift($options);
             if (!empty($options)) {
