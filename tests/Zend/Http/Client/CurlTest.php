@@ -143,7 +143,7 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
     {
         $config = array(
             'adapter'     => 'Zend_Http_Client_Adapter_Curl',
-            'curloptions' => array(CURLOPT_CLOSEPOLICY => true),
+            'curloptions' => array('foo' => true),
         );
         $this->client = new Zend_Http_Client($this->client->getUri(true), $config);
 
@@ -301,7 +301,7 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
 
         $this->assertTrue(is_resource($adapter->getHandle()));
     }
-    
+
     /**
      * @group ZF-9857
      */
